@@ -1,0 +1,58 @@
+plugins {
+	id 'org.springframework.boot' version '2.3.1.RELEASE'
+	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'java'
+}
+
+group = 'com.example'
+version = '0.0.1-SNAPSHOT'
+sourceCompatibility = '11'
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-actuator'
+	implementation 'org.springframework.boot:spring-boot-starter-webflux'
+	implementation 'junit:junit:4.12'
+	implementation 'org.springframework.boot:spring-boot-starter-data-r2dbc'
+	implementation 'io.r2dbc:r2dbc-postgresql'
+	implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
+	implementation 'org.postgresql:postgresql'
+
+	implementation "org.ehcache:ehcache"
+
+	//runtimeOnly 'com.h2database:h2'
+	//runtimeOnly 'io.r2dbc:r2dbc-h2'
+
+	developmentOnly 'org.springframework.boot:spring-boot-devtools'
+
+	compileOnly 'org.projectlombok:lombok'
+
+	annotationProcessor 'org.projectlombok:lombok'
+
+	testImplementation('org.springframework.boot:spring-boot-starter-test')
+	testImplementation 'io.projectreactor:reactor-test'
+	//testImplementation 'de.flapdoodle.embed:de.flapdoodle.embed.mongo'
+
+	compile group: 'org.apache.commons', name: 'commons-lang3'
+	compile group: 'javax.validation', name: 'validation-api'
+	compile group: 'org.modelmapper', name: 'modelmapper', version: '2.3.8'
+	compile 'org.flywaydb:flyway-core:6.5.5'
+
+	//compile group: 'org.springframework.data', name: 'spring-data-relational'
+	//compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-jpa'
+	//compile group: 'com.github.jasync-sql', name: 'jasync-r2dbc-mysql', version: '1.1.3'
+
+}
+
+test {
+	useJUnit()
+}

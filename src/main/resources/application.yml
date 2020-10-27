@@ -1,0 +1,105 @@
+server:
+  port: ${PORT:8081}
+spring:
+  application:
+    name: company-ms
+  profiles:
+    active: dev
+  r2dbc:
+    url: r2dbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.databaseName}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+  flyway:
+    url: jdbc:postgresql://${spring.datasource.host}:${spring.datasource.port}/${spring.datasource.databaseName}
+    username: ${spring.datasource.username}
+    password: ${spring.datasource.password}
+
+#use discovery to get the proper microservice end point url
+microserviceurl:
+  addressMicroServiceUrl: http://localhost:8082/address
+  phoneMicroServiceUrl: http://localhost:8084/phones
+  accountingInfoMicroServiceUrl: http://localhost:8083/accountinginfo
+
+logging:
+  level:
+    root: info
+
+
+
+---
+spring:
+  profiles: dev
+  datasource:
+    host: localhost
+    databaseName: companies
+    port: 5432
+    schema: common
+    username: postgres
+    password: Genius2020
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+  logging:
+    level:
+      org:
+        springframework:
+          data:
+            r2dbc: debug
+          web: debug
+---
+spring:
+  profiles: qa
+  datasource:
+    host: localhost
+    databaseName: companies
+    port: 5432
+    schema: common
+    username: postgres
+    password: Genius2020
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+  logging:
+    level:
+      org:
+        springframework:
+          data:
+            r2dbc: info
+---
+spring:
+  profiles: prod
+  datasource:
+    host: localhost
+    databaseName: companies
+    port: 5432
+    schema: common
+    username: postgres
+    password: Genius2020
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+  logging:
+    level:
+      org:
+        springframework:
+          data:
+            r2dbc: error
+---
+spring:
+  profiles: uat
+  datasource:
+    host: localhost
+    databaseName: companies
+    port: 5432
+    schema: common
+    username: postgres
+    password: Genius2020
+  flyway:
+    enabled: true
+    baselineOnMigrate: true
+  logging:
+    level:
+      org:
+        springframework:
+          data:
+            r2dbc: info
